@@ -1,0 +1,84 @@
+{
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "ecmaFeatures": {
+      "experimentalObjectRestSpread": true,
+    }
+  },
+  "extends": [
+    "plugin:import/errors",
+    "plugin:import/warnings"
+  ],
+  "globals": {
+    "styles": true,
+    "fetch": true,
+    "window": true,
+    "document": true,
+    "require": true
+  },
+  "plugins": [
+    "import",
+  ],
+  "rules": {
+    "func-names": 0,
+    "generator-star-spacing": 0,
+    "valid-jsdoc": ["error", {
+      "requireReturnDescription": false,
+      "requireReturnType": false,
+      "requireParamDescription": false
+    }],
+
+    "import/prefer-default-export": 0,
+    "no-multi-spaces": 0,
+    "comma-dangle": ["error", "only-multiline"],
+    "one-var": 0,
+
+    "require-yield": 0,
+    "prefer-arrow-callback": 0,
+    "object-property-newline": 0,
+    "key-spacing": 0,
+    "quote-props": 0,
+    "new-cap": 0,
+
+    // no undefined
+    "no-undef": "error",
+    // parentheses
+    "arrow-parens": [ 2, "as-needed" ],
+
+    "no-case-declarations": 0,
+
+    // module import
+    "import/no-extraneous-dependencies": 2,
+    "import/imports-first": 0,
+    "import/no-unresolved": [2, { commonjs: true, amd: true }],
+    "import/named": 2,
+    "import/namespace": 2,
+    "import/default": 2,
+    "import/export": 2,
+
+    // indentation
+    "indent": [ 2, 2, { "SwitchCase": 1 } ],
+
+    // spacing
+    "space-in-parens": [ 2, "never" ],
+    "object-curly-spacing": [ 2, "always" ],
+    "no-multiple-empty-lines": [ 2, { "max": 2, "maxEOF": 1, "maxBOF": 1 } ],
+    "linebreak-style": ["error", "unix"],
+
+    // constant condition
+    "no-constant-condition": 0,
+
+    // strings
+    "quotes": [ 2, "single", { "allowTemplateLiterals": true } ],
+
+    // code arrangement matter
+    "no-use-before-define": [ 2, { "functions": false, "classes": false } ],
+
+    // make it meaningful
+    "prefer-const": 1,
+
+    // keep it simple
+    "complexity": [ 1, 10 ],
+  }
+}
