@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Boilerplate for ReactJS project with hot code reloading",
   "scripts": {
-    "build": "babel src/otp.js -o build/index.js",
+    "build": "mkdir -p build/ && babel src/otp.js --out-file build/index.js",
     "docs:md": "mkdir -p docs && documentation build ./src/index.js --format md --github -o docs/API.md",
     "docs:md:watch": "mkdir -p docs && documentation build -w ./src/index.js --format md --github -o docs/API.md",
     "docs:html:watch": "mkdir -p docs && documentation serve -w ./src/index.js --format html",
