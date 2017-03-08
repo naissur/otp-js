@@ -2,6 +2,9 @@
 
 [OTP](http://erlang.org/doc/design_principles/des_princ.html) helpers for javascript, work-in-progress
 
+[![Build Status](https://travis-ci.org/Naissur/otp-js.svg?branch=master)](https://travis-ci.org/Naissur/otp-js)
+
+
 `npm run build` builds
 
 `npm run docs:md` generates documentation
