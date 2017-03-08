@@ -4,13 +4,19 @@
   "description": "Boilerplate for ReactJS project with hot code reloading",
   "scripts": {
     "build": "mkdir -p build/ && babel src/otp.js --out-file build/index.js",
+    "build:tests": "mkdir -p build/ && babel src/otp.spec.js --out-file build/spec.js",
+    "build:test:utils": "mkdir -p build/ && babel src/test-utils.js --out-file build/test-utils.js",
+
     "docs:md": "mkdir -p docs && documentation build ./src/index.js --format md --github -o docs/API.md",
     "docs:md:watch": "mkdir -p docs && documentation build -w ./src/index.js --format md --github -o docs/API.md",
     "docs:html:watch": "mkdir -p docs && documentation serve -w ./src/index.js --format html",
+
     "lint": "eslint src",
     "lint:fix": "eslint --fix src",
-    "test": "tap --node-arg=--require --node-arg=babel-core/register --node-arg=--require --node-arg=babel-polyfill 'src/**/*.spec.js'",
-    "test:watch": "nodemon --watch src -q -x \"tap --node-arg=--require --node-arg=babel-core/register --node-arg=--require --node-arg=babel-polyfill 'src/**/*.spec.js' \""
+    "test": "tap --node-arg=--require --node-arg=babel-polyfill build/spec.js",
+    "test:watch": "nodemon --watch src -q -x \"tap --node-arg=--require --node-arg=babel-polyfill build/spec.js \"",
+
+    "coverage": "tap --cov --node-arg=--require --node-arg=babel-polyfill build/spec.js"
   },
   "keywords": [
     "otp"
