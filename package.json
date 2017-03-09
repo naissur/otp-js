@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Boilerplate for ReactJS project with hot code reloading",
   "scripts": {
-    "build": "babel-node node_modules/.bin/rollem",
+    "build": "node ./build.js",
     "postbuild": "sed -ie \"s/'build_TEMP'/'\\.\\/'/g\" build/test.js",
     "build:watch": "nodemon --watch src -q -x \"npm run build\"",
     "dev": "babel-node node_modules/.bin/rollem -w",
@@ -33,6 +33,7 @@
     "documentation": "4.0.0-beta.18",
     "eslint": "^3.17.1",
     "eslint-plugin-import": "^2.2.0",
+    "nodemon": "^1.11.0",
     "rollem": "^1.10.0",
     "rollup": "^0.41.4",
     "rollup-plugin-babel": "^2.7.1",
