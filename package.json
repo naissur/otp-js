@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "description": "Boilerplate for ReactJS project with hot code reloading",
   "scripts": {
-    "build": "mkdir -p build/ && babel src/otp.js --out-file build/index.js",
-    "build:tests": "mkdir -p build/ && babel src/otp.spec.js --out-file build/spec.js",
-    "build:tests:utils": "mkdir -p build/ && babel src/test-utils.js --out-file build/test-utils.js",
+    "build": "mkdir -p build/ && babel src/otp.js --out-file build/index.js  --source-maps inline",
+    "build:tests": "mkdir -p build/ && babel src/otp.spec.js --out-file build/spec.js  --source-maps inline",
+    "build:tests:utils": "mkdir -p build/ && babel src/test-utils.js --out-file build/test-utils.js  --source-maps inline",
 
     "docs:md": "mkdir -p docs && documentation build ./src/index.js --format md --github -o docs/API.md",
     "docs:md:watch": "mkdir -p docs && documentation build -w ./src/index.js --format md --github -o docs/API.md",
