@@ -3,20 +3,18 @@
   "version": "1.0.0",
   "description": "Boilerplate for ReactJS project with hot code reloading",
   "scripts": {
-    "build": "mkdir -p build/ && babel src/otp.js --out-file build/index.js  --source-maps inline",
-    "build:tests": "mkdir -p build/ && babel src/otp.spec.js --out-file build/spec.js  --source-maps inline",
-    "build:tests:utils": "mkdir -p build/ && babel src/test-utils.js --out-file build/test-utils.js  --source-maps inline",
-
+    "build": "rollem",
+    "postbuild": "sed -ie \"s\/'build_TEMP'\/'\\.\\\/'/g\" build/test.js",
+    "build:watch": "nodemon --watch src -q -x \"npm run build\"",
+    "dev": "rollem -w",
     "docs:md": "mkdir -p docs && documentation build ./src/index.js --format md --github -o docs/API.md",
     "docs:md:watch": "mkdir -p docs && documentation build -w ./src/index.js --format md --github -o docs/API.md",
     "docs:html:watch": "mkdir -p docs && documentation serve -w ./src/index.js --format html",
-
     "lint": "eslint src",
     "lint:fix": "eslint --fix src",
-    "test": "tap --node-arg=--require --node-arg=babel-polyfill build/spec.js",
-    "test:watch": "nodemon --watch src -q -x \"tap --node-arg=--require --node-arg=babel-polyfill build/spec.js \"",
-
-    "coverage": "tap --cov --node-arg=--require --node-arg=babel-polyfill build/spec.js"
+    "test": "tap build/test.js",
+    "test:watch": "nodemon --watch src -q -x \"tap build/test.js \"",
+    "coverage": "tap --cov build/test.js"
   },
   "keywords": [
     "otp"
@@ -25,15 +23,23 @@
     "babel-cli": "6.8.0",
     "babel-core": "6.23.1",
     "babel-eslint": "7.0.0",
+    "babel-plugin-external-helpers": "^6.22.0",
     "babel-polyfill": "6.8.0",
     "babel-preset-es2015": "^6.22.0",
+    "babel-preset-latest": "^6.22.0",
     "babel-preset-stage-0": "6.0.15",
     "babel-register": "6.23.0",
     "debug": "^2.6.1",
     "documentation": "4.0.0-beta.18",
     "eslint": "^3.17.1",
-    "tap": "10.0.2",
-    "eslint-plugin-import": "^2.2.0"
+    "eslint-plugin-import": "^2.2.0",
+    "rollem": "^1.10.0",
+    "rollup": "^0.41.4",
+    "rollup-plugin-babel": "^2.7.1",
+    "rollup-plugin-commonjs": "^7.1.0",
+    "rollup-plugin-node-resolve": "^2.0.0",
+    "rollup-watch": "^3.2.2",
+    "tap": "10.0.2"
   },
   "dependencies": {
     "ramda": "0.23.0",

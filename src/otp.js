@@ -9,8 +9,8 @@
 /* eslint-disable no-continue */
 
 import { delay } from 'redux-saga';
-import { prop, values, map, has, head, compose, reject } from 'ramda';
 import { fork, race, call, cancel, join } from 'redux-saga/effects';
+import { prop, values, map, has, head, compose, reject, merge } from 'ramda';
 
 
 export const ONE_FOR_ONE = 'ONE_FOR_ONE',
@@ -66,10 +66,9 @@ export const supervisor = {
 
       supervisor.debug('init: loop', { tasks });
 
-      const waitedLongEnough = yield race({
-        ...tasks,
-        waitedLongEnough : call(delay, maxT / maxR, true)
-      });
+      const waitedLongEnough = yield race(merge(tasks,
+        { waitedLongEnough : call(delay, maxT / maxR, true) }
+      ));
 
       if (!has('waitedLongEnough', waitedLongEnough)) {
         supervisor.debug('init: not waited long enough', { waitedLongEnough });

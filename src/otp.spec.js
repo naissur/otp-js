@@ -1,3 +1,5 @@
+import 'babel-polyfill';
+
 import { test } from 'tap';
 
 import { delay } from 'redux-saga';
@@ -7,7 +9,7 @@ import { createMockTask } from 'redux-saga/utils';
 import { checkGeneratorScenario as checkScenario } from './test-utils';
 
 /* eslint-disable import/no-unresolved */
-import { supervisor, ONE_FOR_ONE, ONE_FOR_MANY, PERMANENT, TEMPORARY } from '../build';
+import { supervisor, ONE_FOR_ONE, ONE_FOR_MANY, PERMANENT, TEMPORARY } from 'build_TEMP';
 
 // Data protocol examples
 

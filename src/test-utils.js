@@ -9,12 +9,15 @@ import { path } from 'ramda';
 
 export const resumeIteratorAndCheckOutput = (t, iterator) => (into, outof) => {
   let value;
+  if (!iterator) {
+    throw 'iterator is undefined';
+  }
 
   try {
     value = iterator.next(into).value;
-    return t.deepEqual(value, outof);
+    t.deepEqual(value, outof);
   } catch (e) {
-    return t.deepEqual(e.message, path(['error', 'message'], outof));
+    t.deepEqual(e.message, outof.error.message);
   }
 };
 
