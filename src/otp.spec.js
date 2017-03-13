@@ -59,22 +59,6 @@ test('erl system works', t => {
   t.is(sys.list()[1], pid)
 });
 
-test('supervisor: one-for-one, temporary child, simple', t => {
-  const pid = sys.spawn(() => supervisor.init({
-    supFlags: { strategy: ONE_FOR_ONE },
-    childSpecs: [temporaryWorkerSpec]
-  }));
-
-  // initialization
-
-  sys.send(pid, null)
-  sys.receive(out => t.deepEqual(out, fork(worker)));
-
-  sys.send(mockWorker);                   // spawns first (and only) worker
-  sys.receive(out => t.deepEqual(out, timedWorkerRace));
-  sys.receive(() => t.fail());
-});
-
 
 test('supervisor: one-for-one, max restart frequency', t => {
   // initialization
