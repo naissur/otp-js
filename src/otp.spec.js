@@ -1,6 +1,6 @@
 import 'babel-polyfill';
 
-import tes from 'ava';
+import test from 'ava';
 
 import { delay } from 'redux-saga';
 import { call, fork, race, cancel, join } from 'redux-saga/effects';
@@ -46,11 +46,11 @@ const mockWorker         = createMockTask(),
   });
 
 let sys;
-tes.beforeEach(t => {
+test.beforeEach(t => {
   sys = new ProcessSystem();
 })
 
-tes('erl system works', t => {
+test('erl system works', t => {
   const pid = sys.spawn(function* () {
     yield 1;
   });
@@ -59,36 +59,20 @@ tes('erl system works', t => {
   t.is(sys.list()[1], pid)
 });
 
-
-  /* 
-
 test('supervisor: one-for-one, temporary child, simple', t => {
-  // initialization
-  const supervisorIter = supervisor.init({
+  const pid = sys.spawn(() => supervisor.init({
     supFlags: { strategy: ONE_FOR_ONE },
     childSpecs: [temporaryWorkerSpec]
-  });
+  }));
 
-  checkScenario(t, supervisorIter, [
-    null,
+  // initialization
 
-    fork(worker), mockWorker,                   // spawns first (and only) worker
+  sys.send(pid, null)
+  sys.receive(out => t.deepEqual(out, fork(worker)));
 
-                                                // main loop:
-
-    timedWorkerRace,                            // yields worker and delay race
-
-    waitedLongEnough,                           // if waited long enough,
-    workerRace,                                 // worker race is yielded
-
-    workerTerminated,                           // when worker terminates,
-
-    race({
-      waitedLongEnough: call(delay, 1000, true) // it doesn't get restarted
-    })
-  ]);
-
-  t.end();
+  sys.send(mockWorker);                   // spawns first (and only) worker
+  sys.receive(out => t.deepEqual(out, timedWorkerRace));
+  sys.receive(() => t.fail());
 });
 
 
@@ -126,8 +110,6 @@ test('supervisor: one-for-one, max restart frequency', t => {
     restartFreqError                // supervisor dies
 
   ]);
-
-  t.end();
 });
 
 
@@ -164,8 +146,6 @@ test('supervisor: one-for-one, multi', t => {
     firstWorkerTerminated,          // if any worker terminates,
     restartFreqError                // supervisor dies
   ]);
-
-  t.end();
 });
 
 
@@ -193,8 +173,5 @@ test('supervisor: all-for-one, multi', t => {
     cancel(mockWorkerTwo), null,    // and second gets restarted too
     fork(workerTwo), mockWorkerTwo,
   ]);
-
-  t.end();
 });
 
-*/
