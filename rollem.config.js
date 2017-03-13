@@ -8,7 +8,7 @@ const config = {
   plugins: [
     common(),
     resolve({
-      skip: [ 'redux-saga', 'redux-saga/effects', 'ramda', 'tap', 'babel-polyfill', 'debug', 'build_TEMP' ],
+      skip: [ 'redux-saga', 'redux-saga/effects', 'ramda', 'tap', 'babel-polyfill', 'debug', 'build_TEMP', 'erlang-js', 'ava'],
       preferBuiltins: false  // Default: true
     }),
     babel({

@@ -1,6 +1,6 @@
 import 'babel-polyfill';
 
-import { test } from 'tap';
+import tes from 'ava';
 
 import { delay } from 'redux-saga';
 import { call, fork, race, cancel, join } from 'redux-saga/effects';
@@ -10,6 +10,8 @@ import { checkGeneratorScenario as checkScenario } from './test-utils';
 
 /* eslint-disable import/no-unresolved */
 import { supervisor, ONE_FOR_ONE, ONE_FOR_MANY, PERMANENT, TEMPORARY } from 'build_TEMP';
+import { ProcessSystem, States } from 'erlang-js'
+
 
 // Data protocol examples
 
@@ -43,38 +45,34 @@ const mockWorker         = createMockTask(),
     'second': join(mockWorkerTwo)
   });
 
+let sys;
+tes.beforeEach(t => {
+  sys = new ProcessSystem();
+})
 
-test('supervisor: one-for-one, permanent child, simple', t => {
-  // initialization
-  const supervisorIter = supervisor.init({
-    supFlags: { strategy: ONE_FOR_ONE, maxT: 1000, maxR: 1 },
-    childSpecs: [permanentWorkerSpec]
+tes(t => {
+  const pid = sys.spawn(function* () {
+    yield 1;
   });
 
-  checkScenario(t, supervisorIter, [
-    null,
+  t.is(sys.list().length, 2);
+  t.is(sys.list()[1], pid)
+});
 
-    fork(worker), mockWorker,   // spawns first (and only) worker
-
-                                // main loop:
-
-    timedWorkerRace,            // yields worker and delay race
-
-    waitedLongEnough,           // if delay DOES trigger,
-    workerRace,                 // workers race is yielded
-
-    workerTerminated,           // when worker terminates,
-    fork(worker), mockWorker,   // spawns first (and only) worker
+tes('supervisor: one-for-one, permanent child, simple', t => {
+  const pid2 = sys.spawn(function*() {
+    t.pass();
+  })
+})
+  /* 
 
 
-    timedWorkerRace,            // ... in loop
-    waitedLongEnough,
-    workerRace,
+test('supervisor: one-for-one, permanent child, simple', t => {
+  console.log(ProcessSystem, States);
+  // const sys = new ProcessSystem();
 
-    workerTerminated,
-    fork(worker), mockWorker,
-  ]);
 
+  t.pass();
   t.end();
 });
 
@@ -214,3 +212,4 @@ test('supervisor: all-for-one, multi', t => {
   t.end();
 });
 
+*/

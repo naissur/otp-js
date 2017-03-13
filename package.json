@@ -12,14 +12,18 @@
     "docs:html:watch": "mkdir -p docs && documentation serve -w ./src/index.js --format html",
     "lint": "eslint src",
     "lint:fix": "eslint --fix src",
-    "test": "tap build/test.js",
-    "test:watch": "nodemon --watch src -q -x \"tap build/test.js \"",
-    "coverage": "tap --cov build/test.js"
+    "test": "ava build/test.js",
+    "test:watch": "nodemon -q -w build -x \"ava build/test.js\"",
+    "coverage": "nyc check-coverage --lines 100 --functions 100 --branches 100"
   },
   "keywords": [
     "otp"
   ],
+  "ava": {
+    "source": "build/"
+  },
   "devDependencies": {
+    "ava": "^0.18.2",
     "babel-cli": "^6.8.0",
     "babel-core": "6.23.1",
     "babel-eslint": "7.0.0",
@@ -34,6 +38,7 @@
     "eslint": "^3.17.1",
     "eslint-plugin-import": "^2.2.0",
     "nodemon": "^1.11.0",
+    "nyc": "^10.1.2",
     "rollem": "^1.10.0",
     "rollup": "^0.41.4",
     "rollup-plugin-babel": "^2.7.1",
@@ -43,6 +48,7 @@
     "tap": "10.0.2"
   },
   "dependencies": {
+    "erlang-js": "^0.5.0",
     "ramda": "0.23.0",
     "redux-saga": "^0.14.3"
   }
