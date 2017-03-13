@@ -50,7 +50,7 @@ tes.beforeEach(t => {
   sys = new ProcessSystem();
 })
 
-tes(t => {
+tes('erl system works', t => {
   const pid = sys.spawn(function* () {
     yield 1;
   });
@@ -59,23 +59,8 @@ tes(t => {
   t.is(sys.list()[1], pid)
 });
 
-tes('supervisor: one-for-one, permanent child, simple', t => {
-  const pid2 = sys.spawn(function*() {
-    t.pass();
-  })
-})
+
   /* 
-
-
-test('supervisor: one-for-one, permanent child, simple', t => {
-  console.log(ProcessSystem, States);
-  // const sys = new ProcessSystem();
-
-
-  t.pass();
-  t.end();
-});
-
 
 test('supervisor: one-for-one, temporary child, simple', t => {
   // initialization
