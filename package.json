@@ -14,7 +14,7 @@
     "lint:fix": "eslint --fix src",
     "test": "ava build/test.js",
     "test:watch": "nodemon -q -w build -x \"ava build/test.js\"",
-    "coverage": "npm run test && nyc --lines 60 --functions 60 --branches 60 check-coverage && nyc --reporter=lcov --reporter=text-lcov --produce-source-map=true report"
+    "coverage": "nyc npm run test && nyc --lines 50 --functions 50 --branches 50 check-coverage && nyc --reporter=lcov --reporter=text-lcov --produce-source-map=true report | coveralls"
   },
   "keywords": [
     "otp"
