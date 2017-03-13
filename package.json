@@ -14,7 +14,7 @@
     "lint:fix": "eslint --fix src",
     "test": "ava build/test.js",
     "test:watch": "nodemon -q -w build -x \"ava build/test.js\"",
-    "coverage": "nyc check-coverage --lines 60 --functions 60 --branches 60"
+    "coverage": "nyc check-coverage && nyc --reporter=lcov --reporter=text-lcov --lines 60 --functions 60 --branches 60 --produce-source-map=true report | coveralls"
   },
   "keywords": [
     "otp"
@@ -33,6 +33,7 @@
     "babel-preset-latest": "^6.22.0",
     "babel-preset-stage-0": "6.0.15",
     "babel-register": "6.23.0",
+    "coveralls": "^2.12.0",
     "debug": "^2.6.1",
     "documentation": "4.0.0-beta.18",
     "eslint": "^3.17.1",
