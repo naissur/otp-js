@@ -1,10 +1,11 @@
 {
-  "name": "react-hot-boilerplate",
+  "name": "otp-js",
   "version": "1.0.0",
-  "description": "Boilerplate for ReactJS project with hot code reloading",
+  "description": "OTP for JS",
   "scripts": {
     "build": "node ./build.js",
     "postbuild": "sed -ie \"s/'build_TEMP'/'\\.\\/'/g\" build/test.js",
+    "prepublish": "npm run build",
     "build:watch": "nodemon --watch src -q -x \"npm run build\"",
     "dev": "babel-node node_modules/.bin/rollem -w",
     "docs:md": "mkdir -p docs && documentation build ./src/index.js --format md --github -o docs/API.md",
@@ -16,8 +17,11 @@
     "test:watch": "nodemon -q -w build -x \"ava build/test.js\"",
     "coverage": "nyc npm run test && nyc --lines 50 --functions 50 --branches 50 check-coverage && nyc --reporter=lcov --reporter=text-lcov --produce-source-map=true report | coveralls"
   },
+  "repository": "https://github.com/Naissur/otp-js",
+  "author": "Vlad Aituganov <vlad.aituganov@gmail.com>",
   "keywords": [
-    "otp"
+    "otp",
+    "js"
   ],
   "ava": {
     "source": "build/"
